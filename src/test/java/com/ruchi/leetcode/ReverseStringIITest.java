@@ -9,6 +9,7 @@ public class ReverseStringIITest {
 
     @Test
     public void reverseStr() {
-        assertEquals("bacdfeg",obj.reverseStr("abcdefg",2));
+        assertEquals("bacdfeghjikl",obj.reverseStr("abcdefghijkl",2));
+        assertEquals("gfedcba",obj.reverseStr("abcdefg",8));
     }
 }
