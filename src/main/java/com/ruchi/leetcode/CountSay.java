@@ -31,11 +31,21 @@ import java.util.Map;
 public class CountSay {
     public String countAndSay(int n) {
         Map<Integer, String> map = new HashMap<Integer, String>();
-        String s = "";
         map.put(1, "1");
 
-        for (int i = 1; i < 30; i++) {
-            int num = i + 1;
+        createMap(map,n);
+
+        if (map.containsKey(n)) {
+            return map.get(n);
+        } else {
+            throw new IllegalArgumentException();
+        }
+
+
+    }
+
+    private static void createMap(Map<Integer, String> map, int n) {
+        for (int i = 1; i < n; i++) {
             if (map.containsKey(i)) {
                 char[] values = map.get(i).toCharArray();
                 StringBuilder str = new StringBuilder();
@@ -52,17 +62,8 @@ public class CountSay {
                     }
                     k = k + count;
                 }
-                map.put(num, str.toString());
+                map.put(i+1, str.toString());
             }
         }
-
-        if (map.containsKey(n)) {
-            return map.get(n);
-        } else {
-            throw new IllegalArgumentException();
-        }
-
-
     }
-
 }
