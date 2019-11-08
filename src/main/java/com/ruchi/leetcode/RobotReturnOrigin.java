@@ -23,22 +23,20 @@ import java.util.Map;
 //Explanation: The robot moves left twice. It ends up two "moves" to the left of the origin. We return false because it is not at the origin at the end of its moves.
 public class RobotReturnOrigin {
     public boolean judgeCircle(String moves) {
-        Map<String,Integer> map = new HashMap<String, Integer>();
-        map.put("R",1);
-        map.put("L",-1);
-        map.put("U",-1);
-        map.put("D",1);
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("R", 1);
+        map.put("L", -1);
+        map.put("U", -1);
+        map.put("D", 1);
 
-        int count=0;
+        int count = 0;
         char[] chars = moves.toCharArray();
-        for(int i=0;i<chars.length;i++)
-        {
-            if(map.containsKey(String.valueOf(chars[i])))
-            {
-                count+=map.get(String.valueOf(chars[i]));
+        for (int i = 0; i < chars.length; i++) {
+            if (map.containsKey(String.valueOf(chars[i]))) {
+                count += map.get(String.valueOf(chars[i]));
             }
         }
 
-        return count==0 ? true : false;
+        return count == 0 ? true : false;
     }
 }
