@@ -10,5 +10,6 @@ public class RobotReturnOriginTest {
     public void judgeCircle() {
         assertEquals(true,obj.judgeCircle("UD"));
         assertEquals(false,obj.judgeCircle("LL"));
+        assertEquals(false,obj.judgeCircle("LDRRLRUULR"));
     }
 }

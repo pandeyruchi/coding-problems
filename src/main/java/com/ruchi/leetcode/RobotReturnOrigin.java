@@ -1,5 +1,7 @@
 package com.ruchi.leetcode;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,20 +25,32 @@ import java.util.Map;
 //Explanation: The robot moves left twice. It ends up two "moves" to the left of the origin. We return false because it is not at the origin at the end of its moves.
 public class RobotReturnOrigin {
     public boolean judgeCircle(String moves) {
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        map.put("R", 1);
-        map.put("L", -1);
-        map.put("U", -1);
-        map.put("D", 1);
-
-        int count = 0;
-        char[] chars = moves.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if (map.containsKey(String.valueOf(chars[i]))) {
-                count += map.get(String.valueOf(chars[i]));
-            }
+        int[] position = new int[]{0, 0};
+        int[] completed = new int[position.length];
+        char[] roboMoves = moves.toCharArray();
+        for (int i = 0; i < roboMoves.length; i++) {
+            completed = getMove(roboMoves[i], position);
         }
+        return  (completed[0]==0 && completed[1]==0)?true:false;
+    }
 
-        return count == 0 ? true : false;
+    private int[] getMove(char roboMove, int[] position) {
+        switch (roboMove) {
+            case 'R':
+                position[0] += 1;
+                break;
+            case 'L':
+                position[0] -= 1;
+                break;
+            case 'U':
+                position[1] += 1;
+                break;
+            case 'D':
+                position[1] -= 1;
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+        return position;
     }
 }
