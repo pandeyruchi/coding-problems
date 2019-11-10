@@ -1,5 +1,9 @@
 package com.ruchi.leetcode;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 ///Every email consists of a local name and a domain name, separated by the @ sign.
 //
 //For example, in alice@leetcode.com, alice is the local name, and leetcode.com is the domain name.
@@ -32,7 +36,17 @@ package com.ruchi.leetcode;
 //Local names do not start with a '+' character.
 public class UniqueEmailAddress {
     public int numUniqueEmails(String[] emails) {
-        int numUniqueEmails = 0;
-        return numUniqueEmails;
+        for (int i = 0; i < emails.length; i++) {
+            int index;
+            String[] split = emails[i].split("@");
+            if (split[0].contains("+")) {
+                index = emails[i].indexOf("+");
+                split[0] = split[0].substring(0, index);
+            }
+            emails[i] = split[0].replace(".", "");
+            emails[i] = emails[i] + "@" + split[1];
+        }
+        Set<String> unique = new HashSet<String>(Arrays.asList(emails));
+        return unique.size();
     }
 }
