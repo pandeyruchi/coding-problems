@@ -1,8 +1,6 @@
 package com.ruchi.leetcode;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 ///Every email consists of a local name and a domain name, separated by the @ sign.
 //
@@ -35,18 +33,40 @@ import java.util.Set;
 //All local and domain names are non-empty.
 //Local names do not start with a '+' character.
 public class UniqueEmailAddress {
-    public int numUniqueEmails(String[] emails) {
+    public int numUniqueEmails2(String[] emails) {
+        Set<String> unique = new HashSet<String>();
         for (int i = 0; i < emails.length; i++) {
-            int index;
             String[] split = emails[i].split("@");
-            if (split[0].contains("+")) {
-                index = emails[i].indexOf("+");
-                split[0] = split[0].substring(0, index);
-            }
-            emails[i] = split[0].replace(".", "");
-            emails[i] = emails[i] + "@" + split[1];
+            split[0] = split[0].split("\\+")[0];
+            unique.add(split[0].replace(".", "") + '@' + split[1]);
         }
-        Set<String> unique = new HashSet<String>(Arrays.asList(emails));
         return unique.size();
+    }
+
+
+
+    public int numUniqueEmails(String[] emails) {
+        Set<String> unique = new HashSet<>();
+        for (String email : emails) {
+            unique.add(getUniqueEmail(email));
+        }
+        return unique.size();
+    }
+
+    private String getUniqueEmail(String email) {
+        String[] split = email.split("@");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (char c : split[0].toCharArray()) {
+            if (c == '.') {
+                continue;
+            }
+            if (c== '+') {
+                break;
+            }
+            stringBuilder.append(c);
+        }
+        stringBuilder.append("@");
+        stringBuilder.append(split[1]);
+        return stringBuilder.toString();
     }
 }
