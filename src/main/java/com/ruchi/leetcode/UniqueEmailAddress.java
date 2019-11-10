@@ -43,8 +43,6 @@ public class UniqueEmailAddress {
         return unique.size();
     }
 
-
-
     public int numUniqueEmails(String[] emails) {
         Set<String> unique = new HashSet<>();
         for (String email : emails) {
