@@ -24,33 +24,44 @@ import java.util.Map;
 //Output: false
 //Explanation: The robot moves left twice. It ends up two "moves" to the left of the origin. We return false because it is not at the origin at the end of its moves.
 public class RobotReturnOrigin {
+    private static class Position{
+        private int row;
+        private int col;
+
+        public Position(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        public void move(char roboMove) {
+            switch (roboMove) {
+                case 'R':
+                    col += 1;
+                    break;
+                case 'L':
+                    col -= 1;
+                    break;
+                case 'U':
+                    row -= 1;
+                    break;
+                case 'D':
+                    row += 1;
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+
+        public boolean isComplete(){
+            return row==0 && col ==0;
+        }
+    }
     public boolean judgeCircle(String moves) {
-        int[] position = new int[]{0, 0};
-        int[] completed = new int[position.length];
+        Position position = new Position(0, 0);
         char[] roboMoves = moves.toCharArray();
         for (int i = 0; i < roboMoves.length; i++) {
-            completed = getMove(roboMoves[i], position);
+            position.move(roboMoves[i]);
         }
-        return  (completed[0]==0 && completed[1]==0)?true:false;
-    }
-
-    private int[] getMove(char roboMove, int[] position) {
-        switch (roboMove) {
-            case 'R':
-                position[0] += 1;
-                break;
-            case 'L':
-                position[0] -= 1;
-                break;
-            case 'U':
-                position[1] += 1;
-                break;
-            case 'D':
-                position[1] -= 1;
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
-        return position;
+        return  position.isComplete();
     }
 }
