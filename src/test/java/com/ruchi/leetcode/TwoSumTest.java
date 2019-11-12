@@ -9,8 +9,8 @@ public class TwoSumTest {
 
     @Test
     public void twoSum() {
-        int[] input={2,7,11,15};
-        int[] output={0,1};
-        assertArrayEquals(output,obj.twoSum(input,9));
+        assertArrayEquals(new int[]{0,1},obj.twoSum(new int[]{2,7,11,15},9));
+        assertArrayEquals(new int[]{0,1},obj.twoSum(new int[]{3,3},6));
+        assertArrayEquals(new int[]{0,2},obj.twoSum(new int[]{3,2,3},6));
     }
 }

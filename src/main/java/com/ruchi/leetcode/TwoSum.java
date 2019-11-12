@@ -1,5 +1,7 @@
 package com.ruchi.leetcode;
 
+import java.util.Arrays;
+
 ////Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 //
 //You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -12,6 +14,16 @@ package com.ruchi.leetcode;
 //return [0, 1].
 public class TwoSum {
     public int[] twoSum(int[] nums, int target) {
-            return new int[]{0,1};
+        int[] indices = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    indices[0] = i;
+                    indices[1] = j;
+                    break;
+                }
+            }
+        }
+        return indices;
     }
 }
