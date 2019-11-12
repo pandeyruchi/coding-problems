@@ -1,6 +1,6 @@
 package com.ruchi.leetcode;
 
-import java.util.Arrays;
+import java.util.*;
 
 ////Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 //
@@ -14,16 +14,14 @@ import java.util.Arrays;
 //return [0, 1].
 public class TwoSum {
     public int[] twoSum(int[] nums, int target) {
-        int[] indices = new int[2];
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[i] + nums[j] == target) {
-                    indices[0] = i;
-                    indices[1] = j;
-                    break;
-                }
+            int compliment = target - nums[i];
+            if (map.containsKey(compliment)) {
+                return new int[]{map.get(compliment), i};
             }
+            map.put(nums[i], i);
         }
-        return indices;
+        return null;
     }
 }
